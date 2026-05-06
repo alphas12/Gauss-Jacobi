@@ -26,11 +26,4 @@ shiny::runApp()
 
 Or, in RStudio, click **Run App**.
 
-## Suggested project structure
-
-```text
-gauss-jacobi/
-├── app.R
-└── README.md
-```
 
