@@ -72,11 +72,6 @@ uses_jacobi <- list(
 
 ui <- fluidPage(
   tags$head(
-    # ChunkFive Font
-    tags$link(
-      href = "https://fonts.googleapis.com/css2?family=ChunkFive&display=swap",
-      rel = "stylesheet"
-    ),
     
     tags$style(HTML("
     
@@ -128,6 +123,8 @@ ui <- fluidPage(
 
       body {
         background: #F6F7F8;
+        display: flex;
+        flex-display: column;
       }
 
       /* Navbar */
@@ -186,7 +183,6 @@ ui <- fluidPage(
         flex-direction: row;
         align-items: center;
         min-height: 100vh;
-        max-height: 100vh;
       }
   
       .landing-right{
@@ -202,7 +198,8 @@ ui <- fluidPage(
         display: flex;
         flex-direction: row;
         align-items: center;
-        min-height: 100vh;  
+        min-height: 100vh;
+        padding: 140px 0;
       }
       
       .definitions-gs-left {
@@ -281,17 +278,14 @@ ui <- fluidPage(
         padding: 15px 12px;
         padding-right: 0;
       }
-      
-      /* For Placeholders :) */
-      
-      .section {
-        margin: 20% 0;
-        padding: 120px 0;
-        margin-top: 0;
-        scroll-margin-top: 120px;
-      }
-    
+
     /* Example Section */
+    
+    #examples {
+        min-height: 100vh;
+        padding: 140px 0;
+    }
+      
     .example-section-background {
       background: #F6F7F8;
       border-radius: 12px;
@@ -421,21 +415,19 @@ ui <- fluidPage(
       font-family: ChunkFive;
       font-size: 40px;
       font-style: normal;
-      font-weight: 400px;
+      font-weight: 400;
       line-height: normal;
-      margin: 0;
     }
     
     /* Styles for Collapsible (Examples section only) */
     #examples .collapse-title {
-      color: #F6F7F8;
       font-family: Inter;
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
       line-height: 1.4;
-      background-color: #2E5090;
-      padding: 18px 18px;
+      background: #183D5E;
+      padding: 30px 45px;
       margin: 0;
       border-radius: 10px;
       cursor: pointer;
@@ -443,32 +435,43 @@ ui <- fluidPage(
       display: flex;
       justify-content: space-between;
       align-items: center;
-      transition: background-color 0.2s ease, border-radius 0.2s ease, margin-bottom 0.2s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
     }
 
     #examples .collapse-title:hover {
-      background-color: #1a3a6b;
+      background-color: #0a2d4d;
     }
 
     #examples .collapse-title .title-text {
+      color: #F6F7F8;
+      text-align: center;
+      font-family: Inter;
+      font-size: 20px;
+      font-style: normal;
       font-weight: 500;
+      line-height: normal;
     }
 
     #examples .collapse-content {
-      display: none;
       padding: 18px;
-      background-color: #fff;
-      border: 1px solid #e5e7eb;
-      border-top: none;
-      border-radius: 0 0 10px 10px;
-      margin-top: 0;
+      background-color: #F6F7F8;
       line-height: 1.65;
-      color: #334155;
       font-size: 14px;
-      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+      pointer-events: none;
+      max-height: 0;
+      overflow: hidden;
+      border-radius: 0 0 20px 20px;
+      opacity: 0;
     }
+    
     #examples .collapse-content.show {
-      display: block;
+      max-height: 1000px;
+      opacity: 1;
+      padding: 18px;
+      pointer-events: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+      margin-bottom: 20px;
+      background-color: #F6F7F8;
     }
 
     #examples .collapse-title .arrow {
@@ -486,10 +489,12 @@ ui <- fluidPage(
     #examples .collapse-title.open {
       border-radius: 10px 10px 0 0;
       margin-bottom: 0;
+      box-shadow: 0
     }
 
     #examples .collapse-content p {
-      margin-bottom: 0.75rem;
+      margin-bottom: 0;
+      
     }
 
     #examples .collapse-content h5 {
@@ -973,6 +978,98 @@ ui <- fluidPage(
         grid-template-columns: 1fr;
       }
     }
+    
+    /* Foundations */
+    
+    #foundations {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 140px 0;
+    }
+    
+    .foundations-content-main {
+      display: flex;
+      flex-direction: column;
+      margin: 0 60px;
+      background: #183D5E;
+      border-radius: 20px;
+      width: 100%;
+    }
+    
+    .foundations-content {
+      padding: 60px 50px;
+    }
+    
+    .foundations-title {
+      color: #F6F7F8;
+      text-align: center;
+      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.16);
+      font-family: ChunkFive;
+      font-size: 40px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 2.4px;
+      margin:0;
+    }
+    
+    /* Conditions */
+    
+    #conditions {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        min-height: 100vh;
+    }
+    
+    .conditions-content {
+      padding: 60px 50px;
+      display:flex;
+      flex-direction:column;
+      justify: space-between;
+      flex: 1;
+      gap: 30px;
+    }
+    
+    .conditions-subcontent {
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      padding: 0 50px;
+    }
+    
+    .conditions-subcontentright {
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      border-radius: 20px;
+      background: #183D5E;
+    }
+    
+    .conditions-title {
+      color: #164670;
+      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.16);
+      font-family: ChunkFive;
+      font-size: 35px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 5.6px;
+    }
+    
+    .conditions-subtitle {
+      color: #183D5E;
+      font-family: Inter;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    
     "))
   ),
   
@@ -1051,7 +1148,7 @@ ui <- fluidPage(
   
   # Jacobi
   
-  div(id ="definitions-jacobi", class ="definitions",
+  div(id ="definitions-jacobi", style="padding: 0;", class ="definitions",
       
       div(class = "definitions-sub-content",
           div(style="align-items: end;", class="definitions-sub-content-title",
@@ -1092,9 +1189,65 @@ ui <- fluidPage(
       )
   ),
   
-  # Placeholders
-  div(id = "foundations", class = "section", h2("Foundations Section")),
-  div(id = "conditions", class = "section", h2("Conditions Section")),
+  # Foundations Page
+  div(id = "foundations",
+      div(class = "foundations-content-main", 
+          div(class = "foundations-content", 
+              h1(class="foundations-title", "Mathematical Foundations")
+          ),
+          div(style= "border-top: 4px solid #F6F7F8;", class = "foundations-content",
+              p(style = "color: #F6F7F8", class = "body-text", 
+                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
+                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
+                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
+                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class =
+                "highlighted-text"), " commodo fringilla.")
+          )
+      ),
+          
+  ),
+  
+  # Conditions Page
+  div(id = "conditions",
+      div(class="conditions-content", 
+          div(class="conditions-subcontent", 
+              div(class="conditions-title ", "Conditions"),
+              p(class = "body-text", 
+                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
+                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
+                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
+                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
+                "highlighted-text"), " commodo fringilla.")
+          ),
+          div(class="conditions-subcontent", 
+              div(class="conditions-subtitle ", "Convergence"),
+              p(class = "body-text", 
+                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
+                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
+                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
+                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
+                "highlighted-text"), " commodo fringilla.")
+          ),
+          div(class="conditions-subcontent", 
+              div(class="conditions-subtitle ", "Divergence"),
+              p(class = "body-text", 
+                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
+                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
+                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
+                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
+                "highlighted-text"), " commodo fringilla.")
+          ),
+      ),
+      div(style = "background: #183D5E; border-radius: 20px; margin: 60px 50px; margin-left: 0;", class="conditions-content",
+          div(style="color: #F6F7F8;", class="conditions-subtitle ", "Convergence"),
+          p(style="color: #F6F7F8;", class = "body-text", 
+            "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
+            " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
+            fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
+            consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
+            "highlighted-text"), " commodo fringilla.")
+      )
+  ),
   
   # Examples Section
   div(id = "examples", class = "section",
@@ -1134,41 +1287,62 @@ ui <- fluidPage(
           # Example Problems Title
           h2(class = "example-title", "Example Problems"),
           
-          # Step-by-step Algorithm
-            div(class = "collapse-title", onclick = "toggleCollapse(this, 'algo')",
-              div(class = "title-text", "Step-by-step Algorithm"),
-              img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")),
-            div(id = "algo", class = "collapse-content", uiOutput("algoContent")),
-          
-          # Given System
-            div(class = "collapse-title", onclick = "toggleCollapse(this, 'system')",
-              div(class = "title-text", "Given System"),
-              img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")),
-            div(id = "system", class = "collapse-content", uiOutput("systemContent")),
-          
-          # Initial Guess
-            div(class = "collapse-title", onclick = "toggleCollapse(this, 'guess')",
-              div(class = "title-text", "Initial Guess"),
-              img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")),
-            div(id = "guess", class = "collapse-content", uiOutput("guessContent")),
-          
-          # Iterations
-            div(class = "collapse-title", onclick = "toggleCollapse(this, 'iter')",
-              div(class = "title-text", "Iterations"),
-              img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")),
-            div(id = "iter", class = "collapse-content", uiOutput("iterContent")),
-          
-          # Convergence
-            div(class = "collapse-title", onclick = "toggleCollapse(this, 'conv')",
-              div(class = "title-text", "Convergence"),
-              img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")),
-            div(id = "conv", class = "collapse-content", uiOutput("convContent")),
-          
-          # Error
-            div(class = "collapse-title", onclick = "toggleCollapse(this, 'error')",
-              div(class = "title-text", "Error"),
-              img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")),
-            div(id = "error", class = "collapse-content", uiOutput("errorContent"))
+          div(style = "display: flex; flex-direction: column",
+              
+              # Step-by-step Algorithm
+              div(style = "display: flex; flex-direction: column",
+                  div(class = "collapse-title", onclick = "toggleCollapse(this, 'algo')",
+                      div(class = "title-text", "Step-by-step Algorithm"),
+                      img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")
+                  ),
+                  div(id = "algo", class = "collapse-content", uiOutput("algoContent"))
+              ),
+              
+              # Given System
+              div(style = "display: flex; flex-direction: column",
+                  div(class = "collapse-title", onclick = "toggleCollapse(this, 'system')",
+                      div(class = "title-text", "Given System"),
+                      img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")
+                  ),
+                  div(id = "system", class = "collapse-content", uiOutput("systemContent"))
+              ),
+              
+              # Initial Guess
+              div(style = "display: flex; flex-direction: column",
+                  div(class = "collapse-title", onclick = "toggleCollapse(this, 'guess')",
+                      div(class = "title-text", "Initial Guess"),
+                      img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")
+                  ),
+                  div(id = "guess", class = "collapse-content", uiOutput("guessContent"))
+              ),
+              
+              # Iterations
+              div(style = "display: flex; flex-direction: column",
+                  div(class = "collapse-title", onclick = "toggleCollapse(this, 'iter')",
+                      div(class = "title-text", "Iterations"),
+                      img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")
+                  ),
+                  div(id = "iter", class = "collapse-content", uiOutput("iterContent"))
+              ),
+              
+              # Convergence
+              div(style = "display: flex; flex-direction: column",
+                  div(class = "collapse-title", onclick = "toggleCollapse(this, 'conv')",
+                      div(class = "title-text", "Convergence"),
+                      img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")
+                  ),
+                  div(id = "conv", class = "collapse-content", uiOutput("convContent"))
+              ),
+              
+              # Error
+              div(style = "display: flex; flex-direction: column",
+                  div(class = "collapse-title", onclick = "toggleCollapse(this, 'error')",
+                      div(class = "title-text", "Error"),
+                      img(src = "assets/down-arrow-white.svg", class = "arrow", alt = "Expand")
+                  ),
+                  div(id = "error", class = "collapse-content", uiOutput("errorContent"))
+              )
+          )
       ),
       div(class = "example-section-box")
     )
@@ -1227,11 +1401,9 @@ ui <- fluidPage(
       if (isOpen) {
         element.classList.add('open');
         element.setAttribute('aria-expanded', 'true');
-        content.style.display = 'block';
       } else {
         element.classList.remove('open');
         element.setAttribute('aria-expanded', 'false');
-        content.style.display = 'none';
       }
     }
 
@@ -1241,7 +1413,6 @@ ui <- fluidPage(
         const trigger = content ? content.previousElementSibling : null;
         if (content) {
           content.classList.remove('show');
-          content.style.display = 'none';
         }
         if (trigger) {
           trigger.classList.remove('open');
@@ -1348,10 +1519,14 @@ server <- function(input, output, session) {
         series = list(x1 = c(0, 0.80, 1.12, 1.25, 1.30, 1.32, 1.33), x2 = c(0, 3.00, 2.73, 2.59, 2.53, 2.51, 2.50))
       )
     )
+    
   )
+  
+  
 
   state <- reactiveValues(method = "gauss", page = 1, calcMethod = "gauss", calculatorTab = "lu")
 
+  
   observeEvent(input$example_method, {
     state$method <- input$example_method
     state$page <- 1
@@ -1639,6 +1814,7 @@ server <- function(input, output, session) {
       Error = round(errors, 8)
     )
   })
+
 }
 
 shinyApp(ui = ui, server = server)
