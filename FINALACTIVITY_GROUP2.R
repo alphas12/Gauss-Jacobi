@@ -632,6 +632,12 @@ ui <- fluidPage(
     }
 
     /* Calculator Section */
+    
+    #calculator {
+      min-height: 100vh;
+      padding: 140px 0;
+    }
+    
     #calculator .calculator-shell {
       display: grid;
       grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.55fr);
@@ -956,7 +962,7 @@ ui <- fluidPage(
       font-weight: 700;
     }
 
-    #calculator .text-card {
+    #calculator .solutions-card {
       border: 1px solid #e5e7eb;
       border-radius: 14px;
       background: #fff;
@@ -965,7 +971,7 @@ ui <- fluidPage(
       line-height: 1.7;
     }
 
-    #calculator .text-card strong {
+    #calculator .solutions-card strong {
       color: #183D5E;
     }
 
@@ -1069,6 +1075,7 @@ ui <- fluidPage(
       font-weight: 500;
       line-height: normal;
     }
+    
     
     "))
   ),
@@ -1350,47 +1357,94 @@ ui <- fluidPage(
 
   div(id = "calculator", class = "section",
     div(class = "calculator-shell",
-      div(class = "calculator-panel",
-        div(class = "calculator-panel-header",
-          h2(class = "panel-title", "Calculator")
-        ),
-        div(class = "calculator-panel-body",
-          uiOutput("calculatorMethodButtons"),
-          div(class = "calc-field-group",
-            div(class = "calc-inline-row",
-              span(class = "calc-inline-label", "Row x Column ="),
-              div(class = "calc-mini-input", numericInput("calc_rows", label = NULL, value = 2, min = 1, max = 20)),
-              span(class = "calc-inline-label", "x"),
-              div(class = "calc-mini-input", numericInput("calc_cols", label = NULL, value = 2, min = 1, max = 20))
+        div(class = "calculator-panel",
+            div(class = "calculator-panel-header",
+                h2(class = "panel-title", "Calculator")
+            ),
+            div(class = "calculator-panel-body",
+                uiOutput("calculatorMethodButtons"),
+                div(class = "calc-field-group",
+                    span(class = "calc-box-label", "A ="),
+                    div(class = "calc-textarea",
+                        textAreaInput(
+                          "calc_matrixA",
+                          label = NULL,
+                          placeholder = "Enter square matrix values\nExample:\n4 1 2; 1 5 1; 2 1 6",
+                          rows = 5
+                        )
+                    )
+                ),
+                div(class = "calc-field-group",
+                    span(class = "calc-box-label", "b ="),
+                    div(class = "calc-textarea",
+                        textAreaInput(
+                          "calc_vectorb",
+                          label = NULL,
+                          placeholder = "Enter vector values\nExample:\n7, 8, 9",
+                          rows = 3
+                        )
+                    )
+                ),
+                div(class = "calc-field-group",
+                    div(class = "calc-inline-row",
+                        span(class = "calc-inline-label", "Tolerance ="),
+                        div(class = "calc-mini-input",
+                            numericInput(
+                              "calc_tolerance",
+                              label = NULL,
+                              value = 0.001,
+                              min = 0,
+                              step = 0.001
+                            )
+                        )
+                    )
+                ),
+                div(class = "calc-field-group",
+                    div(class = "calc-inline-row",
+                        span(class = "calc-inline-label", "Max Iterations ="),
+                        div(class = "calc-mini-input",
+                            numericInput(
+                              "calc_max_iter",
+                              label = NULL,
+                              value = 500,
+                              min = 1,
+                              step = 1
+                            )
+                        )
+                    )
+                ),
+                div(class = "calc-field-group",
+                    div(class = "calc-inline-row",
+                        span(class = "calc-inline-label", "Initial Guess ="),
+                        div(class = "calc-text-input",
+                            textInput(
+                              "calc_initial_guess",
+                              label = NULL,
+                              placeholder = "Optional (default is all 0's)\nExample: 0, 0, 0"
+                            )
+                        )
+                    )
+                ),
+                actionButton(
+                  "calc_submit",
+                  "Enter",
+                  class = "calc-submit-btn"
+                ),
+                div(
+                  class = "calc-help-text",
+                  "Input a square matrix A, vector b, tolerance, initial guess, and maximum iterations before clicking Enter."
+                )
             )
-          ),
-          div(class = "calc-field-group",
-            span(class = "calc-box-label", "A ="),
-            div(class = "calc-textarea", textAreaInput("calc_matrixA", label = NULL, placeholder = "Enter matrix values, e.g. 3 1; 1 4", rows = 4))
-          ),
-          div(class = "calc-field-group",
-            span(class = "calc-box-label", "b ="),
-            div(class = "calc-textarea", textAreaInput("calc_vectorb", label = NULL, placeholder = "Enter vector values, e.g. 5, 6", rows = 4))
-          ),
-          div(class = "calc-field-group",
-            div(class = "calc-inline-row",
-              span(class = "calc-inline-label", "Initial Guess ="),
-              div(class = "calc-text-input", textInput("calc_initial_guess", label = NULL, placeholder = "Enter initial guess, e.g. 0, 0"))
-            )
-          )
-          ,actionButton("calc_submit", "Enter", class = "calc-submit-btn"),
-          div(class = "calc-help-text", "Click Enter after filling the fields to update the solution panel.")
-        )
-      ),
-      div(class = "solutions-panel",
-        div(class = "solutions-panel-header",
-          h2(class = "solutions-title", "Solutions"),
-          uiOutput("calculatorTabs")
         ),
-        div(class = "solutions-panel-body",
-          uiOutput("calculatorSolutionUI")
+        div(class = "solutions-panel",
+            div(class = "solutions-panel-header",
+                h2(class = "solutions-title", "Solutions"),
+                uiOutput("calculatorTabs")
+            ),
+            div(class = "solutions-panel-body",
+                uiOutput("calculatorSolutionUI")
+            )
         )
-      )
     )
   ),
   
@@ -1521,10 +1575,8 @@ server <- function(input, output, session) {
     )
     
   )
-  
-  
 
-  state <- reactiveValues(method = "gauss", page = 1, calcMethod = "gauss", calculatorTab = "lu")
+  state <- reactiveValues(method = "gauss", page = 1, calcMethod = "gauss", calculatorTab = "lud")
 
   
   observeEvent(input$example_method, {
@@ -1552,8 +1604,191 @@ server <- function(input, output, session) {
   }, ignoreInit = TRUE)
 
   observeEvent(input$calc_submit, {
-    state$calculatorTab <- "text"
-  }, ignoreInit = TRUE)
+    
+
+    state$calculatorTab <- "solutions"
+    
+    # INIT ERROR STORAGE
+    errors <- list()
+    
+    # READ INPUTS
+    matrix_text <- trimws(input$calc_matrixA)
+    vector_text <- trimws(input$calc_vectorb)
+    guess_text  <- trimws(input$calc_initial_guess)
+    tol <- input$calc_tolerance
+    max_iter <- input$calc_max_iter
+    
+    # BASIC EMPTY CHECKS
+    if (matrix_text == "") errors$A <- "Matrix A is required."
+    if (vector_text == "") errors$b <- "Vector b is required."
+    
+    # PARSERS
+    parse_matrix <- function(text) {
+      
+      rows <- strsplit(text, ";")[[1]]
+      
+      rows <- lapply(rows, function(r) {
+        nums <- unlist(strsplit(trimws(r), "[ ,]+"))
+        as.numeric(nums)
+      })
+      
+      if (length(unique(sapply(rows, length))) != 1) {
+        stop("Each row must have the same number of elements.")
+      }
+      
+      matrix(unlist(rows), nrow = length(rows), byrow = TRUE)
+    }
+    
+    parse_vector <- function(text) {
+      nums <- unlist(strsplit(text, "[ ,]+"))
+      as.numeric(nums)
+    }
+    
+    # SAFE PARSING
+    A <- tryCatch(parse_matrix(matrix_text), error = function(e) {
+      errors$A <- "Invalid matrix format."
+      NULL
+    })
+    
+    b <- tryCatch(parse_vector(vector_text), error = function(e) {
+      errors$b <- "Invalid vector format."
+      NULL
+    })
+    
+    # VALIDATION: MATRIX A
+    if (!is.null(A)) {
+      
+      if (nrow(A) != ncol(A)) {
+        errors$A <- "Matrix A must be square."
+      }
+      
+      if (any(is.na(A))) {
+        errors$A <- "Matrix A contains invalid numbers."
+      }
+    }
+    
+    # VALIDATION: VECTOR B
+    if (!is.null(A) && !is.null(b)) {
+      
+      if (length(b) != nrow(A)) {
+        errors$b <- "Vector b must match number of rows in A."
+      }
+      
+      if (any(is.na(b))) {
+        errors$b <- "Vector b contains invalid numbers."
+      }
+    }
+    
+    # INITIAL GUESS
+    if (guess_text == "") {
+      
+      x0 <- if (!is.null(A)) rep(0, nrow(A)) else NULL
+      
+    } else {
+      
+      x0 <- tryCatch(parse_vector(guess_text), error = function(e) {
+        errors$guess <- "Invalid initial guess format."
+        NULL
+      })
+      
+      if (!is.null(A) && !is.null(x0)) {
+        if (length(x0) != nrow(A)) {
+          errors$guess <- "Initial guess must match size of A."
+        }
+      }
+    }
+    
+    # NUMERIC CHECKS
+    if (!is.null(tol) && tol <= 0) {
+      errors$tolerance <- "Tolerance must be > 0."
+    }
+    
+    if (!is.null(max_iter) && max_iter <= 0) {
+      errors$iter <- "Max iterations must be > 0."
+    }
+    
+    # STOP IF ERRORS EXIST
+    if (length(errors) > 0) {
+      
+      output$calculatorSolutionUI <- renderUI({
+        div(class = "calc-error-block",
+            lapply(errors, function(msg) {
+              div(class = "calc-error-message", msg)
+            })
+        )
+      })
+      
+      return()
+    }
+    
+    # DIAGONAL DOMINANCE CHECK
+    is_dd <- function(A) {
+      for (i in 1:nrow(A)) {
+        if (abs(A[i,i]) < sum(abs(A[i,])) - abs(A[i,i])) {
+          return(FALSE)
+        }
+      }
+      TRUE
+    }
+    
+    if (!is_dd(A)) {
+      
+      output$calculatorSolutionUI <- renderUI({
+        div(class = "calc-error-block",
+            div(class = "calc-error-message",
+                "Matrix A is not diagonally dominant. Cannot proceed."
+            )
+        )
+      })
+      
+      return()
+    }
+    
+    # MATRIX DECOMPOSITION
+    D <- diag(diag(A))
+    
+    L <- A
+    L[upper.tri(L, diag = TRUE)] <- 0
+    
+    U <- A
+    U[lower.tri(U, diag = TRUE)] <- 0
+    
+    # STORE RESULTS (FOR UI)
+    state$A <- A
+    state$b <- b
+    state$x0 <- x0
+    state$D <- D
+    state$L <- L
+    state$U <- U
+    
+    # SUCCESS UI TEST
+    output$calculatorSolutionUI <- renderUI({
+      
+      tagList(
+        
+        div(class = "calc-success-message",
+            "Input validated. Ready for iteration."
+        ),
+        
+        div(class = "matrix-block",
+            h4("D Matrix"),
+            renderTable(D)
+        ),
+        
+        div(class = "matrix-block",
+            h4("L Matrix"),
+            renderTable(L)
+        ),
+        
+        div(class = "matrix-block",
+            h4("U Matrix"),
+            renderTable(U)
+        )
+        
+      )
+    })
+    
+  })
 
   selected_example <- reactive({
     example_bank[[state$method]][[state$page]]
@@ -1696,9 +1931,9 @@ server <- function(input, output, session) {
     }
 
     div(class = "solutions-tabs",
-      tab_button("lu", "LU"),
+      tab_button("lud", "LU Matrix & Diagonal Dominance"),
       tab_button("iterations", "Iterations"),
-      tab_button("text", "Text")
+      tab_button("solutions", "Solutions")
     )
   })
 
@@ -1715,15 +1950,11 @@ server <- function(input, output, session) {
           div(class = "solution-note", "Enter the matrix values and choose a method to see the iteration results here.")
         )
       )
-    } else if (state$calculatorTab == "text") {
+    } else if (state$calculatorTab == "solutions") {
       tagList(
         div(class = "solution-stack",
-          h3(class = "solution-heading", "Text"),
-          div(class = "text-card",
-            tags$p(tags$strong("Selected method:"), paste(state$calcMethod)),
-            tags$p(tags$strong("Matrix A:"), "Enter values in row-by-row form."),
-            tags$p(tags$strong("Vector b:"), "Enter the right-hand side values."),
-            tags$p(tags$strong("Initial guess:"), "Use a comma-separated vector.")
+          h3(class = "solution-heading", "Solutions"),
+          div(class = "solutions-card",
           )
         )
       )
