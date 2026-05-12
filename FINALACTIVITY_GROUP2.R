@@ -90,1012 +90,10 @@ uses_jacobi <- list(
 
 ui <- fluidPage(
   tags$head(
-    
-    tags$style(HTML("
-    
-      @font-face {
-        font-family: 'Chunk-Five';
-        src: url('fonts/chunkfive.regular.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-      }
-      
-      @font-face {
-        font-family: 'Inter';
-        src: url('fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-      }
-      
-      @font-face {
-        font-family: 'IBM-Plex-Sans';
-        src: url('fonts/IBMPlexSans-VariableFont_wdth,wght.ttf') format('truetype');
-        font-weight: normal;
-        font-style: normal;
-      }
-      
-      .highlighted-text {
-        color: #FF576F;
-        font-family: IBM-Plex-Sans;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-      }
-      
-      .body-text {
-        color: #164670;
-        text-align: justify;
-        font-family: IBM-Plex-Sans;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        margin: 0;
-      }
-      
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        background: #F6F7F8;
-        display: flex;
-        flex-display: column;
-      }
-
-      /* Navbar */
-      
-      .custom-navbar {
-        font-family: Inter, sans-serif;
-        position: fixed;
-        top: 65px;
-        left: 0;
-        right: 0;
-        width: calc(100% - 126px); 
-        margin: 0 auto; 
-        background: rgba(22, 70, 112, 0.80);
-        padding: 20px 95px;
-        border-radius: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        z-index: 1000;
-      }
-      
-      .nav-item {
-        color: #F6F7F8;
-        text-align: center;
-        font-family: Inter;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        text-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-      }
-
-      .nav-item:hover {
-        color: #2EC4B6;
-        text-align: center;
-        font-family: Inter;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-        text-decoration-line: underline;
-        text-decoration-style: solid;
-        text-decoration-skip-ink: auto;
-        text-decoration-thickness: auto;
-        text-underline-offset: auto;
-        text-underline-position: from-font;
-        text-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-      }
-      
-      /* Landing Page */
-      
-      #landing {
-        display: flex;
-        justify-content: space-evenly;
-        flex-direction: row;
-        align-items: center;
-        min-height: 100vh;
-      }
-  
-      .landing-right{
-        display: flex; 
-        flex-direction: column;
-        gap: 57px; 
-        width: 30%;
-      }
-      
-      /* GS Definitions Page */
-      
-      .definitions {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        min-height: 100vh;
-        padding: 140px 0;
-      }
-      
-      .definitions-gs-left {
-        display: flex;
-        flex-direction: row;
-        border-radius: 0 20px 20px 0;
-        border: 3px solid #183D5E;
-        border-left: none;
-        background: #F6F7F8;
-        box-shadow: 4px 4px 12.7px 0 rgba(0, 0, 0, 0.14);
-        width: 73%;
-        overflow: hidden;
-      }
-      
-      .definitions-main-content {
-        display: flex;
-        flex-direction: column;
-        padding: 60px 50px;
-        gap: 22px;
-      }
-      
-      .definitions-sub-content {
-        display: flex;
-        flex-direction: column;
-        padding: 60px 50px;
-        flex: 1;
-        gap: 18px;
-      }
-      
-      .definitions-sub-content-title {
-        display:flex;
-        flex-direction: column;
-      }
-      
-      .definitions-sub-content-itemlist {
-        display:flex;
-        flex-direction: column; 
-        gap: 16px;
-      }
-      
-      .definitions-gs-sub-content-item {
-        display: flex;
-        border-right: 3px solid #164670;
-        padding: 15px 12px;
-        padding-left: 0;
-        justify-content: right;      
-      }
-      
-      .definitions-title {
-        color: #183D5E;
-        text-shadow: 0 4px 4px rgba(0, 0, 0, 0.09);
-        font-family: ChunkFive;
-        font-size: 40px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
-      
-      /* Jacobi Definitions Page */
-      
-      .definitions-jacobi-right {
-        display: flex;
-        flex-direction: row;
-        border-radius: 20px 0px 0px 20px;
-        border: 3px solid #183D5E;
-        border-right: none;
-        background: #F6F7F8;
-        box-shadow: 4px 4px 12.7px 0 rgba(0, 0, 0, 0.14);
-        width: 73%;
-        overflow: hidden;
-      }
-      
-      .definitions-jacobi-sub-content-item {
-        display: flex;
-        border-left: 3px solid #164670;
-        padding: 15px 12px;
-        padding-right: 0;
-      }
-
-    /* Example Section */
-    
-    #examples {
-        min-height: 100vh;
-        padding: 140px 0;
-    }
-      
-    .example-section-background {
-      background: #F6F7F8;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-      border: 1px solid #183D5E;
-    }
-
-    .example-section-box {
-      height: 120px;
-      background: #183D5E;
-    }
-
-    .example-section-inner {
-      display: flex;
-      padding: 25px 60px 40px;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 24px;
-      align-self: stretch;
-    }
-
-    .example-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .nav-frame {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      align-self: stretch;
-      padding: 0;
-      width: auto;
-      min-width: 360px;
-      gap: 20px;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 13px;
-      align-items: center;
-    }
-
-    .nav-action-btn {
-      border: none;
-      background: transparent;
-      padding: 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .nav-action-btn.disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    .method-btn {
-      display: flex;
-      padding: 15px 25px;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
-        border-radius: 10px;
-        border: 3px solid #2EC4B6;
-        background: #F6F7F8;
-        box-shadow: 0 4px 10.9px 0 rgba(0, 0, 0, 0.12);
-      color: #2EC4B6;
-      font-family: Inter;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .method-btn:hover {
-      background: #2EC4B6;
-      color: #F6F7F8;
-    }
-
-    .nav-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .nav-controls .page-counter {
-      min-width: 44px;
-    }
-
-    .nav-controls .arrow {
-      width: 11px;
-      height: 22px;
-      cursor: pointer;
-    }
-
-    .page-counter {
-      color: #183D5E;
-      text-align: center;
-      font-family: Inter;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      letter-spacing: 2.08px;
-    }
-
-    .example-subtitle {
-      color: #183D5E;
-      font-family: Inter, sans-serif;
-      font-size: 16px;
-      font-weight: 600;
-      margin-top: -10px;
-      align-self: flex-start;
-    }
-
-    .example-title {
-      color: #164670;
-      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.16);
-      font-family: ChunkFive;
-      font-size: 40px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-    }
-    
-    /* Styles for Collapsible (Examples section only) */
-    #examples .collapse-title {
-      font-family: Inter;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 1.4;
-      background: #183D5E;
-      padding: 30px 45px;
-      margin: 0;
-      border-radius: 10px;
-      cursor: pointer;
-      user-select: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
-    }
-
-    #examples .collapse-title:hover {
-      background-color: #0a2d4d;
-    }
-
-    #examples .collapse-title .title-text {
-      color: #F6F7F8;
-      text-align: center;
-      font-family: Inter;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-    }
-
-    #examples .collapse-content {
-      padding: 18px;
-      background-color: #F6F7F8;
-      line-height: 1.65;
-      font-size: 14px;
-      pointer-events: none;
-      max-height: 0;
-      overflow: hidden;
-      border-radius: 0 0 20px 20px;
-      opacity: 0;
-    }
-    
-    #examples .collapse-content.show {
-      max-height: 1000px;
-      opacity: 1;
-      padding: 18px;
-      pointer-events: auto;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
-      margin-bottom: 20px;
-      background-color: #F6F7F8;
-    }
-
-    #examples .collapse-title .arrow {
-      width: 20px;
-      height: 20px;
-      transform: rotate(-90deg);
-      transition: transform 0.2s ease;
-      flex-shrink: 0;
-    }
-
-    #examples .collapse-title.open .arrow {
-      transform: rotate(0deg);
-    }
-
-    #examples .collapse-title.open {
-      border-radius: 10px 10px 0 0;
-      margin-bottom: 0;
-      box-shadow: 0
-    }
-
-    #examples .collapse-content p {
-      margin-bottom: 0;
-      
-    }
-
-    #examples .collapse-content h5 {
-      margin: 0 0 0.75rem 0;
-      color: #f1f5f9;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    #examples .collapse-content code {
-      display: inline-block;
-      padding: 0.15rem 0.4rem;
-      border-radius: 0.375rem;
-      background: #f1f5f9;
-      color: #0f172a;
-      font-size: 0.95em;
-    }
-
-    #examples .collapse-content ul,
-    #examples .collapse-content ol {
-      margin: 0.5rem 0 0.75rem 1.25rem;
-      padding: 0;
-    }
-
-    #examples .collapse-card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    #examples .content-grid {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    #examples .content-pair {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
-    }
-
-    #examples .content-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #475569;
-    }
-
-    #examples .content-value,
-    #examples .content-note,
-    #examples .content-plotbox,
-    #examples .content-tablebox {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      background: #fff;
-      padding: 14px 16px;
-    }
-
-    #examples .content-note {
-      color: #334155;
-      line-height: 1.65;
-      background: #f8fafc;
-    }
-
-    #examples .content-plotbox {
-      padding: 12px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    }
-
-    #examples .content-tablebox {
-      width: 100%;
-      overflow-x: auto;
-      padding: 0;
-    }
-
-    #examples .content-tablebox table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    #examples .content-tablebox table.table,
-    #examples .content-tablebox table.dataTable {
-      width: 100% !important;
-    }
-
-    #examples .content-tablebox .table {
-      width: 100% !important;
-    }
-
-    #examples .content-tablebox .table-responsive {
-      width: 100%;
-    }
-
-    #examples .content-tablebox th,
-    #examples .content-tablebox td {
-      padding: 10px 12px;
-      border-bottom: 1px solid #e2e8f0;
-      text-align: left;
-      font-size: 13px;
-    }
-
-    #examples .content-tablebox th {
-      color: #0f172a;
-      font-weight: 700;
-      background: #f8fafc;
-    }
-
-    #examples .content-codebox {
-      border: 1px solid #0f172a;
-      border-radius: 12px;
-      background: #0f172a;
-      color: #e2e8f0;
-      padding: 14px 16px;
-      overflow-x: auto;
-    }
-
-    #examples .content-codebox code,
-    #examples .content-codebox pre {
-      margin: 0;
-      white-space: pre-wrap;
-      word-break: break-word;
-      background: transparent;
-      color: inherit;
-      padding: 0;
-    }
-
-    #examples .content-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    /* Calculator Section */
-    
-    #calculator {
-      min-height: 100vh;
-      padding: 140px 0;
-    }
-    
-    #calculator .calculator-shell {
-      display: grid;
-      grid-template-columns: minmax(320px, 0.95fr) minmax(0, 1.55fr);
-      gap: 12px;
-      align-items: stretch;
-    }
-
-    #calculator .calculator-panel,
-    #calculator .solutions-panel {
-      border: 2px solid #1d466f;
-      border-radius: 18px;
-      overflow: hidden;
-      background: #f6f7f8;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
-    }
-
-    #calculator .calculator-panel-header {
-      background: #183D5E;
-      padding: 18px 20px;
-      text-align: center;
-    }
-
-    #calculator .calculator-panel-header .panel-title {
-      color: #F6F7F8;
-      font-family: ChunkFive;
-      font-size: 32px;
-      font-weight: 400;
-      margin: 0;
-    }
-
-    #calculator .calculator-panel-body {
-      padding: 18px 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    #calculator .calculator-methods,
-    #calculator .solutions-tabs {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    #calculator .calc-tab-btn,
-    #calculator .calc-method-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 18px;
-      border-radius: 8px;
-      border: 3px solid #2EC4B6;
-      background: #F6F7F8;
-      color: #2EC4B6;
-      font-family: Inter;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
-    }
-
-    #calculator .calc-method-btn.active,
-    #calculator .calc-tab-btn.active {
-      background: #2EC4B6;
-      color: #F6F7F8;
-    }
-
-    #calculator .calc-method-btn:hover,
-    #calculator .calc-tab-btn:hover {
-      background: #2EC4B6;
-      color: #F6F7F8;
-      transform: translateY(-1px);
-    }
-
-    #calculator .calc-submit-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      align-self: flex-start;
-      min-width: 120px;
-      padding: 11px 20px;
-      border-radius: 10px;
-      border: 3px solid #2EC4B6;
-      background: #2EC4B6;
-      color: #F6F7F8;
-      font-family: Inter;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
-    }
-
-    #calculator .calc-submit-btn:hover {
-      background: #1fa99d;
-      border-color: #1fa99d;
-      transform: translateY(-1px);
-    }
-
-    #calculator .calc-help-text {
-      color: #64748b;
-      font-family: Inter;
-      font-size: 13px;
-      line-height: 1.5;
-      margin-top: -4px;
-    }
-
-    #calculator .calc-method-btn:focus,
-    #calculator .calc-tab-btn:focus {
-      outline: none;
-    }
-
-    #calculator .calc-field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    #calculator .calc-inline-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    #calculator .calc-inline-label {
-      color: #183D5E;
-      font-family: Inter;
-      font-size: 16px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    #calculator .calc-mini-input {
-      width: 78px;
-    }
-
-    #calculator .calc-mini-input input {
-      text-align: center;
-      border: 2px solid #234e79;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: none;
-    }
-
-    #calculator .calc-box-label {
-      color: #183D5E;
-      font-family: Inter;
-      font-size: 16px;
-      font-weight: 600;
-      margin: 0;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    #calculator .calc-textarea textarea,
-    #calculator .calc-text-input input {
-      width: 100%;
-      border: 2px solid #234e79;
-      border-radius: 8px;
-      background: #fff;
-      color: #183D5E;
-      font-family: Inter;
-      box-shadow: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    #calculator .calc-textarea textarea {
-      min-height: 96px;
-      resize: vertical;
-    }
-
-    #calculator .calc-textarea textarea:focus,
-    #calculator .calc-text-input input:focus,
-    #calculator .calc-mini-input input:focus {
-      border-color: #2EC4B6;
-      box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.18);
-      outline: none;
-    }
-
-    #calculator .solutions-panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      padding: 24px 28px 16px;
-      flex-wrap: wrap;
-    }
-
-    #calculator .solutions-title {
-      color: #183D5E;
-      font-family: ChunkFive;
-      font-size: 32px;
-      font-weight: 400;
-      margin: 0;
-      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.16);
-    }
-
-    #calculator .solutions-panel-body {
-      padding: 8px 28px 26px;
-      min-height: 360px;
-    }
-
-    #calculator .solution-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    #calculator .solution-heading {
-      color: #183D5E;
-      font-family: Inter;
-      font-size: 22px;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    #calculator .solution-note {
-      color: #334155;
-      font-family: Inter;
-      font-size: 15px;
-      line-height: 1.7;
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      background: #fff;
-      padding: 16px 18px;
-    }
-
-    #calculator .lu-diagram {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      align-items: stretch;
-    }
-
-    #calculator .factor-card {
-      background: #fff;
-      border: 1px solid #dbe4ee;
-      border-radius: 16px;
-      padding: 14px;
-      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
-    }
-
-    #calculator .factor-label {
-      color: #183D5E;
-      font-family: Inter;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    #calculator .matrix-view {
-      position: relative;
-      min-height: 220px;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #fbfdff 0%, #f6f9fc 100%);
-      border: 1px dashed #c7d3df;
-    }
-
-    #calculator .matrix-view::before,
-    #calculator .matrix-view::after {
-      content: '';
-      position: absolute;
-      top: 16px;
-      bottom: 16px;
-      width: 26px;
-      border-top: 3px solid #234e79;
-      border-bottom: 3px solid #234e79;
-    }
-
-    #calculator .matrix-view::before {
-      left: 14px;
-      border-left: 3px solid #234e79;
-    }
-
-    #calculator .matrix-view::after {
-      right: 14px;
-      border-right: 3px solid #234e79;
-    }
-
-    #calculator .matrix-placeholder-grid {
-      position: absolute;
-      inset: 18px 44px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
-      gap: 12px;
-      align-items: center;
-      justify-items: center;
-    }
-
-    #calculator .matrix-placeholder-grid span {
-      width: 100%;
-      height: 20px;
-      border-radius: 999px;
-      background: rgba(36, 78, 121, 0.12);
-    }
-
-    #calculator .iteration-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    #calculator .iteration-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 12px;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      background: #fff;
-      padding: 14px 16px;
-      color: #183D5E;
-      font-family: Inter;
-      font-size: 15px;
-      font-weight: 500;
-    }
-
-    #calculator .iteration-row span:last-child {
-      color: #2EC4B6;
-      font-weight: 700;
-    }
-
-    #calculator .solutions-card {
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      background: #fff;
-      padding: 18px;
-      color: #334155;
-      line-height: 1.7;
-    }
-
-    #calculator .solutions-card strong {
-      color: #183D5E;
-    }
-
-    @media (max-width: 980px) {
-      #calculator .calculator-shell {
-        grid-template-columns: 1fr;
-      }
-
-      #calculator .lu-diagram {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    /* Foundations */
-    
-    #foundations {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-        padding: 140px 0;
-    }
-    
-    .foundations-content-main {
-      display: flex;
-      flex-direction: column;
-      margin: 0 60px;
-      background: #183D5E;
-      border-radius: 20px;
-      width: 100%;
-    }
-    
-    .foundations-content {
-      padding: 60px 50px;
-    }
-    
-    .foundations-title {
-      color: #F6F7F8;
-      text-align: center;
-      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.16);
-      font-family: ChunkFive;
-      font-size: 40px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      letter-spacing: 2.4px;
-      margin:0;
-    }
-    
-    /* Conditions */
-    
-    #conditions {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
-        align-items: center;
-        min-height: 100vh;
-    }
-    
-    .conditions-content {
-      padding: 60px 50px;
-      display:flex;
-      flex-direction:column;
-      justify: space-between;
-      flex: 1;
-      gap: 30px;
-    }
-    
-    .conditions-subcontent {
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      padding: 0 50px;
-    }
-    
-    .conditions-subcontentright {
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      border-radius: 20px;
-      background: #183D5E;
-    }
-    
-    .conditions-title {
-      color: #164670;
-      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.16);
-      font-family: ChunkFive;
-      font-size: 35px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      letter-spacing: 5.6px;
-    }
-    
-    .conditions-subtitle {
-      color: #183D5E;
-      font-family: Inter;
-      font-size: 28px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-    }
-    
-    
-    "))
+    tags$link(
+      rel = "stylesheet",
+      href = "styles.css"
+    )
   ),
   
 
@@ -1500,7 +498,76 @@ ui <- fluidPage(
   "))
 )
 
+run_iterations <- function(A, b, x0, tol, max_iter, method = "gauss") {
 
+  n <- length(b)
+
+  history <- matrix(0, nrow = max_iter + 1, ncol = n)
+  history[1, ] <- x0
+
+  errors <- numeric(max_iter + 1)
+  errors[1] <- NA
+
+  x <- x0
+
+  converged <- FALSE
+
+  for (k in 1:max_iter) {
+
+    x_old <- x
+
+    if (method == "gauss") {
+
+      # GAUSS-SEIDEL
+      for (i in 1:n) {
+
+        sum1 <- if (i > 1) sum(A[i, 1:(i-1)] * x[1:(i-1)]) else 0
+        sum2 <- if (i < n) sum(A[i, (i+1):n] * x_old[(i+1):n]) else 0
+
+        x[i] <- (b[i] - sum1 - sum2) / A[i, i]
+      }
+
+    } else {
+
+      # JACOBI
+      x_new <- numeric(n)
+
+      for (i in 1:n) {
+
+        sum_others <- sum(A[i, -i] * x_old[-i])
+
+        x_new[i] <- (b[i] - sum_others) / A[i, i]
+      }
+
+      x <- x_new
+    }
+
+    err <- sqrt(sum((x - x_old)^2))
+
+    history[k + 1, ] <- x
+    errors[k + 1] <- err
+
+    if (err < tol) {
+      converged <- TRUE
+      break
+    }
+  }
+
+  used_rows <- 1:(k + 1)
+
+  history <- history[used_rows, , drop = FALSE]
+  errors <- errors[used_rows]
+
+  colnames(history) <- paste0("x", 1:n)
+
+  list(
+    solution = x,
+    history = as.data.frame(history),
+    errors = errors,
+    iterations = k,
+    converged = converged
+  )
+}
 
 server <- function(input, output, session) {
   example_bank <- list(
@@ -1599,7 +666,7 @@ server <- function(input, output, session) {
     
   )
 
-  state <- reactiveValues(method = "gauss", page = 1, calcMethod = "gauss", calculatorTab = "lud")
+  state <- reactiveValues(method = "gauss", page = 1, calcMethod = "gauss", calculatorTab = "lud", calcResult = NULL)
 
   
   observeEvent(input$example_method, {
@@ -1783,6 +850,17 @@ server <- function(input, output, session) {
     state$D <- D
     state$L <- L
     state$U <- U
+
+    calc_res <- run_iterations(
+      A = A,
+      b = b,
+      x0 = x0,
+      tol = tol,
+      max_iter = max_iter,
+      method = state$calcMethod
+    )
+
+    state$calcResult <- calc_res
     
     # SUCCESS UI TEST
     output$calculatorSolutionUI <- renderUI({
@@ -1795,17 +873,17 @@ server <- function(input, output, session) {
         
         div(class = "matrix-block",
             h4("D Matrix"),
-            renderTable(D)
+            tableOutput("DTable")
         ),
         
         div(class = "matrix-block",
             h4("L Matrix"),
-            renderTable(L)
+            tableOutput("LTable")
         ),
         
         div(class = "matrix-block",
             h4("U Matrix"),
-            renderTable(U)
+            tableOutput("UTable")
         )
         
       )
@@ -1962,23 +1040,54 @@ server <- function(input, output, session) {
 
   output$calculatorSolutionUI <- renderUI({
     if (state$calculatorTab == "iterations") {
+      res <- state$calcResult
+
+      if (is.null(res)) {
+        return(div("No iteration data yet."))
+      }
+
       tagList(
-        div(class = "solution-stack",
-          h3(class = "solution-heading", "Iterations"),
-          div(class = "iteration-list",
-            div(class = "iteration-row", span("Iteration 1"), span("Pending")),
-            div(class = "iteration-row", span("Iteration 2"), span("Pending")),
-            div(class = "iteration-row", span("Iteration 3"), span("Pending"))
-          ),
-          div(class = "solution-note", "Enter the matrix values and choose a method to see the iteration results here.")
-        )
+
+        h3(class = "solution-heading", "Iterations"),
+        tableOutput("calcIterationsTable"),
+        plotOutput("calcErrorPlot", height = "300px")
+
       )
-    } else if (state$calculatorTab == "solutions") {
+  }else if (state$calculatorTab == "solutions") {
       tagList(
         div(class = "solution-stack",
           h3(class = "solution-heading", "Solutions"),
-          div(class = "solutions-card",
-          )
+          {
+            req(state$calcResult)
+            
+            res <- state$calcResult
+            
+            div(class = "solutions-card",
+                
+                h4("Final Approximation"),
+                
+                renderTable({
+                  
+                  data.frame(
+                    Variable = paste0("x", 1:length(res$solution)),
+                    Value = round(res$solution, 8)
+                  )
+                  
+                }),
+                
+                br(),
+                
+                p(
+                  strong("Iterations Used: "),
+                  res$iterations
+                ),
+                
+                p(
+                  strong("Converged: "),
+                  ifelse(res$converged, "YES", "NO")
+                )
+            )
+          }
         )
       )
     } else {
@@ -1986,26 +1095,21 @@ server <- function(input, output, session) {
         div(class = "solution-stack",
           h3(class = "solution-heading", "LU Factorization"),
           div(class = "lu-diagram",
-            div(class = "factor-card",
-              div(class = "factor-label", "L"),
-              div(class = "matrix-view",
-                div(class = "matrix-placeholder-grid",
-                  span(), span(), span(),
-                  span(), span(), span(),
-                  span(), span(), span()
-                )
+              div(class = "lu-diagram",
+                  div(class = "factor-card",
+                      div(class = "factor-label", "L"),
+                      div(class = "matrix-view",
+                          tableOutput("LTable")
+                      )
+                  ),
+                  
+                  div(class = "factor-card",
+                      div(class = "factor-label", "U"),
+                      div(class = "matrix-view",
+                          tableOutput("UTable")
+                      )
+                  )
               )
-            ),
-            div(class = "factor-card",
-              div(class = "factor-label", "U"),
-              div(class = "matrix-view",
-                div(class = "matrix-placeholder-grid",
-                  span(), span(), span(),
-                  span(), span(), span(),
-                  span(), span(), span()
-                )
-              )
-            )
           ),
           div(class = "solution-note", "The LU result preview will appear here after the calculator inputs are provided.")
         )
@@ -2069,6 +1173,51 @@ server <- function(input, output, session) {
     )
   })
 
+  output$calcIterationsTable <- renderTable({
+    
+    req(state$calcResult)
+    
+    h <- state$calcResult$history
+    e <- state$calcResult$errors
+    
+    data.frame(
+      Iteration = 0:(nrow(h)-1),
+      round(h, 6),
+      Error = round(e, 8)
+    )
+  })
+  
+  output$calcErrorPlot <- renderPlot({
+    
+    req(state$calcResult)
+    
+    errors <- state$calcResult$errors[-1]
+    
+    plot(
+      seq_along(errors),
+      errors,
+      type = "b",
+      pch = 19,
+      col = "darkred",
+      xlab = "Iteration",
+      ylab = "Error",
+      main = "Convergence Error"
+    )
+    
+    grid()
+  })
+  
+  output$DTable <- renderTable({
+    state$D
+  })
+  
+  output$LTable <- renderTable({
+    state$L
+  })
+  
+  output$UTable <- renderTable({
+    state$U
+  })
 }
 
 shinyApp(ui = ui, server = server)
