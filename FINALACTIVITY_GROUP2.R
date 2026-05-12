@@ -55,19 +55,37 @@ gauss_seidel_iterations <- function(A, b, x0, n_iter) {
 }
 
 uses_gs <- list(
-  list("Vestibulum feugiat dui quis diam convallis mattis."),
-  list("Integer vehicula diam sed ligula ", span("highlighted text", class = "highlighted-text"), " commodo fringilla."),
-  list("Lorem ipsum dolor sit amet, ", span("highlighted text", class = "highlighted-text"), " adipiscing elit."),
-  list("Vestibulum feugiat dui quis diam convallis mattis."),
-  list("Integer vehicula diam sed ligula ", span("highlighted text", class = "highlighted-text"), " commodo fringilla.")
+  list("When solving ", span("diagonally dominant systems", class = "highlighted-text"), " where fast convergence is needed."),
+  
+  list("For engineering and scientific problems that involve ", 
+       span("large sparse matrices", class = "highlighted-text"), 
+       " and repeated calculations."),
+  
+  list("When updated variable values should immediately improve the next approximation during iteration."),
+  
+  list("In numerical simulations where ", 
+       span("memory efficiency", class = "highlighted-text"), 
+       " is important."),
+  
+  list("When comparing iterative methods because Gauss-Seidel often converges ", 
+       span("faster than Jacobi", class = "highlighted-text"), ".")
 )
 
 uses_jacobi <- list(
-  list("Vestibulum feugiat dui quis diam convallis mattis."),
-  list("Integer vehicula diam sed ligula ", span("highlighted text", class = "highlighted-text"), " commodo fringilla."),
-  list("Lorem ipsum dolor sit amet, ", span("highlighted text", class = "highlighted-text"), " adipiscing elit."),
-  list("Vestibulum feugiat dui quis diam convallis mattis."),
-  list("Integer vehicula diam sed ligula ", span("highlighted text", class = "highlighted-text"), " commodo fringilla.")
+  list("When solving systems that can be separated into ", 
+       span("independent calculations", class = "highlighted-text"), "."),
+  
+  list("For problems suited to ", 
+       span("parallel computing", class = "highlighted-text"), 
+       " since all updates use previous iteration values."),
+  
+  list("When introducing iterative numerical methods because the algorithm is simple and easy to understand."),
+  
+  list("For diagonally dominant matrices where stable convergence can still be achieved."),
+  
+  list("When comparing convergence behavior with ", 
+       span("Gauss-Seidel", class = "highlighted-text"), 
+       " in numerical analysis.")
 )
 
 ui <- fluidPage(
@@ -1091,12 +1109,13 @@ ui <- fluidPage(
       
       div(class="landing-right",
         img(src = "assets/title.svg", style = "display: block;"),
-        p(style = "text-align: justify; margin: 0;", class = "body-text", 
-          "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-          " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-          fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-          consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-          "highlighted-text"), " commodo fringilla."
+        p(style = "text-align: justify; margin: 0;", class = "body-text",
+          "The ", span("Gauss-Seidel", class = "highlighted-text"),
+          " and ", span("Jacobi", class = "highlighted-text"),
+          " methods are iterative numerical techniques used to solve systems of linear equations. 
+          These methods generate approximate solutions through repeated computation and are especially useful 
+          for large systems where direct methods become computationally expensive. Both approaches are widely 
+          applied in engineering, physics, computer science, and numerical analysis."
         )
       )
       
@@ -1110,22 +1129,23 @@ ui <- fluidPage(
       div(class = "definitions-gs-left",
         div(style= "width:73%;", class="definitions-main-content",
           h1(class="definitions-title", "Gauss-Seidel Method"),
-          p(class = "body-text", 
-            "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-            " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-          fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-          consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-                                                                  "highlighted-text"), " commodo fringilla."
+          p(class = "body-text",
+            "The ", span("Gauss-Seidel Method", class = "highlighted-text"),
+            " is an iterative technique for solving systems of linear equations. 
+            Unlike Jacobi, this method immediately uses newly computed values within the same iteration, 
+            allowing faster convergence for many diagonally dominant systems. It is commonly used in numerical 
+            computing because of its efficiency and simplicity."
           )
         ),
         div(style= "flex:1; background:#183D5E;", class="definitions-main-content",
           h1(style = "color:#F6F7F8;", class="definitions-title", "History"),
-          p(style = "color: #F6F7F8;", class = "body-text", 
-            "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-            " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-          fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-          consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-                                                                  "highlighted-text"), " commodo fringilla."
+          p(style = "color: #F6F7F8;", class = "body-text",
+            "The method was developed from the works of ", 
+            span("Carl Friedrich Gauss", class = "highlighted-text"),
+            " and later refined by ", 
+            span("Philipp Ludwig von Seidel", class = "highlighted-text"),
+            ". It became one of the most important iterative techniques in numerical linear algebra and remains 
+            widely used in modern computational mathematics."
           )
         )
       ),
@@ -1168,22 +1188,21 @@ ui <- fluidPage(
       div(class = "definitions-jacobi-right",
           div(style= "flex:1;", class="definitions-main-content",
               h1(class="definitions-title", "History"),
-              p(class = "body-text", 
-                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-          fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-          consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-                                                                  "highlighted-text"), " commodo fringilla."
+              p(class = "body-text",
+                "The ", span("Jacobi Method", class = "highlighted-text"),
+                " was introduced by German mathematician Carl Gustav Jacob Jacobi. 
+                It is one of the earliest iterative techniques for solving linear systems and became important in 
+                numerical analysis due to its simplicity and suitability for parallel computation."
               )
           ),
           div(style= "width:73%; background:#183D5E;", class="definitions-main-content",
-              h1(style = "color: #F6F7F8", class="definitions-title", "Gauss-Seidel Method"),
-              p(style = "color: #F6F7F8", class = "body-text", 
-                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-          fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-          consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-                                                                  "highlighted-text"), " commodo fringilla."
+              h1(style = "color: #F6F7F8", class="definitions-title", "Jacobi Method"),
+              p(style = "color: #F6F7F8", class = "body-text",
+                "The ", span("Jacobi Method", class = "highlighted-text"),
+                " is an iterative algorithm used to solve systems of linear equations. 
+                Each variable is updated using only values from the previous iteration, making the method simple 
+                and highly suitable for parallel processing. Although it may converge slower than Gauss-Seidel, 
+                it remains an important foundational numerical technique."
               )
           )
       )
@@ -1196,12 +1215,14 @@ ui <- fluidPage(
               h1(class="foundations-title", "Mathematical Foundations")
           ),
           div(style= "border-top: 4px solid #F6F7F8;", class = "foundations-content",
-              p(style = "color: #F6F7F8", class = "body-text", 
-                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class =
-                "highlighted-text"), " commodo fringilla.")
+              p(style = "color: #F6F7F8", class = "body-text",
+                "Both the ", span("Gauss-Seidel", class = "highlighted-text"),
+                " and ", span("Jacobi", class = "highlighted-text"),
+                " methods are based on transforming a system of linear equations into iterative formulas. 
+                A system written in matrix form as Ax = b is rearranged so that each variable can be repeatedly 
+                approximated until convergence is achieved. These methods rely heavily on concepts such as matrix 
+                decomposition, diagonal dominance, convergence criteria, and iterative approximation."
+              )
           )
       ),
           
@@ -1212,40 +1233,42 @@ ui <- fluidPage(
       div(class="conditions-content", 
           div(class="conditions-subcontent", 
               div(class="conditions-title ", "Conditions"),
-              p(class = "body-text", 
-                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-                "highlighted-text"), " commodo fringilla.")
+              p(class = "body-text",
+                "Both the ", span("Gauss-Seidel", class = "highlighted-text"),
+                " and ", span("Jacobi", class = "highlighted-text"),
+                " methods are based on transforming a system of linear equations into iterative formulas. 
+                A system written in matrix form as Ax = b is rearranged so that each variable can be repeatedly 
+                approximated until convergence is achieved. These methods rely heavily on concepts such as matrix 
+                decomposition, diagonal dominance, convergence criteria, and iterative approximation."
+              )
           ),
           div(class="conditions-subcontent", 
               div(class="conditions-subtitle ", "Convergence"),
-              p(class = "body-text", 
-                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-                "highlighted-text"), " commodo fringilla.")
+              p(class = "body-text",
+                "A method is said to converge when successive approximations become increasingly close to the exact solution. 
+                For both Jacobi and Gauss-Seidel methods, convergence is commonly guaranteed when the coefficient matrix is ",
+                span("strictly diagonally dominant", class = "highlighted-text"),
+                " or symmetric positive definite."
+              )
           ),
           div(class="conditions-subcontent", 
               div(class="conditions-subtitle ", "Divergence"),
-              p(class = "body-text", 
-                "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-                " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-                fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-                consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-                "highlighted-text"), " commodo fringilla.")
+              p(class = "body-text",
+                "Divergence occurs when the iterative approximations move away from the actual solution instead of approaching it. 
+                This commonly happens when the matrix does not satisfy convergence conditions or when numerical instability affects 
+                the iteration process."
+              )
           ),
       ),
       div(style = "background: #183D5E; border-radius: 20px; margin: 60px 50px; margin-left: 0;", class="conditions-content",
           div(style="color: #F6F7F8;", class="conditions-subtitle ", "Convergence"),
-          p(style="color: #F6F7F8;", class = "body-text", 
-            "Lorem ipsum dolor sit amet ", span("highlighted text", class = "highlighted-text"), 
-            " adipiscing elit. Ut maximus commodo purus. Nulla eget ligula in tortori aculis 
-            fringilla. Vestibulum feugiat dui quis diam convallis mattis. Praesent blandit convallis 
-            consectetur. Integer vehicula diam sed ligula ", span("highlighted text", class = 
-            "highlighted-text"), " commodo fringilla.")
+          p(style="color: #F6F7F8;", class = "body-text",
+            "In practice, the ", span("Gauss-Seidel Method", class = "highlighted-text"),
+            " often converges faster because it immediately uses updated values during computation. 
+            The ", span("Jacobi Method", class = "highlighted-text"),
+                      " is easier to parallelize because all updates depend only on values from the previous iteration. 
+            Choosing the appropriate method depends on the structure of the matrix and the computational requirements."
+          )
       )
   ),
   
