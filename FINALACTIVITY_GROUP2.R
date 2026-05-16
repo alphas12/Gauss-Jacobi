@@ -883,6 +883,23 @@ create_calculator_section <- function() {
   )
 }
 
+# Create the footer
+create_footer <- function() {
+  div(
+    style = "
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #F6F7F8;
+      border-top: 1px solid #0f2c45;
+      background: #183D5E;
+    ",
+    "The images used in this application are sourced from the internet and remain the property of their respective owners."
+  )
+}
+
 #' JavaScript used for collapsible example panels.
 create_app_scripts <- function() {
   tags$script(HTML("
@@ -934,6 +951,7 @@ ui <- fluidPage(
   create_conditions_section(),
   create_examples_section(),
   create_calculator_section(),
+  create_footer(),
   create_app_scripts()
 )
 
