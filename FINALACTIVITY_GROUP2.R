@@ -891,12 +891,25 @@ create_footer <- function() {
       padding: 20px;
       margin-top: 40px;
       font-size: 14px;
-      font-weight: bold;
       color: #F6F7F8;
       border-top: 1px solid #0f2c45;
       background: #183D5E;
     ",
-    "The images used in this application are sourced from the internet and remain the property of their respective owners."
+    
+    tags$p(
+      style = "margin: 0; font-weight: 700;",
+      "The images used in this application are sourced from the internet and remain the property of their respective owners."
+    ),
+    
+    tags$p(
+      style = "margin: 6px 0 0 0; font-weight: 400;",
+      "This application is intended for educational purposes only."
+    ),
+    
+    tags$p(
+      style = "margin: 6px 0 0 0; font-weight: 400;",
+      "Developed by Group 2 - Abangan, Barago, Go Andrei, Muñoz, Pastoriza"
+    )
   )
 }
 
