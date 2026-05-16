@@ -1438,11 +1438,13 @@ server <- function(input, output, session) {
     
     data.frame(
       Iteration = 0:(nrow(history) - 1),
-      x1 = round(history$x1, 6),
-      x2 = round(history$x2, 6),
-      Error = round(res$errors, 8)
+      "x₁" = round(history$x1, 6),
+      "x₂" = round(history$x2, 6),
+      Error = round(res$errors, 8),
+      check.names = FALSE
     )
-  })
+  },
+  align = "c")
   
   # ---------------------------------------------------------------------------
   # Calculator interactions

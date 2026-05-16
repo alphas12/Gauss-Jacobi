@@ -428,6 +428,11 @@ body {
     padding: 14px 16px;
 }
 
+#iterHistory th,
+#iterHistory td {
+    text-align: center !important;
+}
+
 #examples .content-note {
     color: #334155;
     line-height: 1.65;
