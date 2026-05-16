@@ -546,6 +546,49 @@ body {
     flex-wrap: wrap;
 }
 
+/* Result Tab Buttons */
+
+#calculator .calc-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 3px solid #2EC4B6;
+
+    background: #F6F7F8;
+    color: #2EC4B6;
+
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    box-shadow: 0 4px 10.9px rgba(0, 0, 0, 0.12);
+}
+
+#calculator .calc-tab-btn.active {
+    background: #2EC4B6;
+    color: #F6F7F8;
+}
+
+#calculator .calc-tab-btn:hover {
+    background: #2EC4B6;
+    color: #F6F7F8;
+    transform: translateY(-1px);
+}
+
+#calculator .calc-tab-btn:focus {
+    outline: none;
+}
+
 #calculator .calc-submit-btn {
     display: inline-flex;
     align-items: center;

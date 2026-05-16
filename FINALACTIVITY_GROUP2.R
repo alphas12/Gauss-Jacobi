@@ -11,7 +11,6 @@
 #
 # Notes:
 #   - The calculator itself is Jacobi-only.
-#   - Gauss-Seidel is only discussed in the educational sections.
 # ===============================================================================
 
 library(shiny)
@@ -475,7 +474,21 @@ uses_jacobi <- list(
 get_example_bank <- function() {
   list(
     list(
-      algo = "<h5>Jacobi Iteration Formula:</h5><p><code>x<sub>i</sub><sup>(k+1)</sup> = (b<sub>i</sub> - Σ<sub>j≠i</sub> a<sub>ij</sub> x<sub>j</sub><sup>(k)</sup>) / a<sub>ii</sub></code></p><p>All variables are updated using values from the previous iteration only.</p>",
+      algo = paste0(
+        "<h5>Jacobi Iteration Formula:</h5>",
+        
+        "<div class='formula-display'>",
+        "$$\\mathbf{x}^{(k+1)} = \\mathbf{D}^{-1}\\left(\\mathbf{b} - (\\mathbf{L} + \\mathbf{U})\\mathbf{x}^{(k)}\\right)$$",
+        "</div>",
+        
+        "<p>In component form:</p>",
+        
+        "<div class='formula-display'>",
+        "$$x_i^{(k+1)} = \\frac{b_i - \\sum_{j \\ne i} a_{ij}x_j^{(k)}}{a_{ii}}$$",
+        "</div>",
+        
+        "<p>All variables are updated using values from the previous iteration only.</p>"
+      ),
       system = c("4x₁ + x₂ = 1", "2x₁ + 3x₂ = 2"),
       A = matrix(c(4, 1, 2, 3), nrow = 2, byrow = TRUE),
       b = c(1, 2),
